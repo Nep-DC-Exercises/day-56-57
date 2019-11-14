@@ -8,7 +8,6 @@ export class BlogPost extends Component {
 
     async componentDidMount() {
         const id = this.props.match.params.blog_id;
-        console.log(id);
         this.getBlogPost(id);
     }
 
@@ -32,7 +31,7 @@ export class BlogPost extends Component {
                     <div>
                         <h1>{blog.title}</h1>
                         <h3>Written by: {blog.author_id}</h3>
-                        <p>{blog.content}s</p>
+                        <p>{blog.content}</p>
                     </div>
                 </>
             );

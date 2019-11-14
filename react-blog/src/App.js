@@ -7,7 +7,6 @@ import "./App.css";
 function App() {
     return (
         <Router>
-          <h1>hello</h1>
             <Route exact path="/" component={BlogList} />
             <Route path="/blogs/:blog_id" component={BlogPost} /> 
         </Router>

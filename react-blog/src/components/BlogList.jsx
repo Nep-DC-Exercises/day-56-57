@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { loadData } from "../utils/loadData";
-// hladf;laskdfj
 export default class BlogList extends Component {
     state = {
         posts: []
