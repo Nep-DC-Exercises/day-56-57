@@ -20,7 +20,16 @@ router.delete("/:id", async (req, res, next) => {
     const oneBlogPost = await blogs.deleteBlogPostById(id);
     res.json({
         message: "Blog post deleted successfully!"
-    })
+    });
+});
+
+router.post("/", async (req, res, next) => {
+    const { title, preview, content } = req.body;
+    const oneBlogPost = blogs.createBlogPost(title, preview, content);
+
+    res.json({
+        message: "Blog post created."
+    });
 });
 
 module.exports = router;
