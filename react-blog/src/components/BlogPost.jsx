@@ -47,7 +47,6 @@ export class BlogPost extends Component {
                 editMode
             });
             this.getBlogPost(data.get('id'))
-            return response.json()
         });
     };
 
