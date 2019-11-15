@@ -8,11 +8,21 @@ export default class BlogList extends Component {
     async componentDidMount() {
         const response = await loadData(`/blogs`);
         const posts = response;
-        console.log(posts)
 
         this.setState({
             posts
         });
+    }
+
+    handleDelete = (id) => {
+        let currentPosts = [...this.state.posts]
+        return fetch(`/blogs/${id}`, {
+          method: 'delete'
+        })
+        .then(() => {
+            let updatedPosts = currentPosts.filter(post => post.id !== id);
+            this.setState({posts:updatedPosts})
+        })
     }
 
     render() {
@@ -27,7 +37,8 @@ export default class BlogList extends Component {
                         <p>Written by: {post.author_id}</p>
                         <p>{post.date}</p>
                         <p>{post.preview}</p>
-                        <a href={`/blogs/${post.id}`}>Read More</a>
+                        <button><a href={`/blogs/${post.id}`}>Read More</a></button>
+                        <button onClick={() => this.handleDelete(post.id)}>Delete</button>
                     </li>
                 ))}
                 </ul>
