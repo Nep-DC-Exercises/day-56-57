@@ -15,4 +15,12 @@ router.get("/:id", async (req, res, next) => {
     res.json(oneBlogPost).status(200);
 });
 
+router.delete("/:id", async (req, res, next) => {
+    const { id } = req.params;
+    const oneBlogPost = await blogs.deleteBlogPostById(id);
+    res.json({
+        message: "Blog post deleted successfully!"
+    })
+});
+
 module.exports = router;

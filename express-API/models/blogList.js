@@ -29,6 +29,18 @@ class blogs {
             return err.message;
         }
     }
+
+    static async deleteBlogPostById(blogId) {
+        try {
+            const response = await db.one(
+                `DELETE FROM blogposts WHERE id=$1`,
+                [blogId]
+            );
+            return response;
+        } catch (err) {
+            return err.message;
+        }
+    }
 }
 
 module.exports = blogs;
