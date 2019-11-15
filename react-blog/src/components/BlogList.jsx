@@ -14,35 +14,55 @@ export default class BlogList extends Component {
         });
     }
 
-    handleDelete = (id) => {
-        let currentPosts = [...this.state.posts]
+    handleDelete = id => {
+        let currentPosts = [...this.state.posts];
         return fetch(`/blogs/${id}`, {
-          method: 'delete'
-        })
-        .then(() => {
+            method: "delete"
+        }).then(() => {
             let updatedPosts = currentPosts.filter(post => post.id !== id);
-            this.setState({posts:updatedPosts})
-        })
-    }
+            this.setState({ posts: updatedPosts });
+        });
+    };
 
     render() {
         const { posts } = this.state;
-        return (
-            <div>
-                <ul>
-                {posts.map(post => (
-                
-                    <li key={post.id}>
-                        <h3>{post.title}</h3>
-                        <p>Written by: {post.author_id}</p>
-                        <p>{post.date}</p>
-                        <p>{post.preview}</p>
-                        <button><a href={`/blogs/${post.id}`}>Read More</a></button>
-                        <button onClick={() => this.handleDelete(post.id)}>Delete</button>
-                    </li>
-                ))}
-                </ul>
-            </div>
-        );
+        if (!posts) {
+            return <h1>I'm loading my guy</h1>;
+        } else {
+            return (
+                <>
+                    <div>
+                        <ul>
+                            {posts.map(post => (
+                                <li key={post.id}>
+                                    <h3>{post.title}</h3>
+                                    <p>Written by: {post.author_id}</p>
+                                    <p>{post.date}</p>
+                                    <p>{post.preview}</p>
+                                    <button>
+                                        <a href={`/blogs/${post.id}`}>
+                                            Read More
+                                        </a>
+                                    </button>
+                                    <button
+                                        onClick={() =>
+                                            this.handleDelete(post.id)
+                                        }
+                                    >
+                                        Delete
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div>
+                        <button>
+                            <a href={`/blogs/create`}>CREATE A NEW
+                            POST!</a>
+                        </button>
+                    </div>
+                </>
+            );
+        }
     }
 }
