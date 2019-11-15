@@ -54,6 +54,26 @@ class blogs {
             return err.message;
         }
     }
+
+    static async updatePostById(title, preview, content, blogId) {
+        try {
+            const response = await db.one(
+                `UPDATE blogposts SET title=$1,preview=$2,content=$3 WHERE id=$4;`,
+                [title, preview, content, blogId]
+            );
+            return response;
+        } catch (err) {
+            return err.message;
+        }
+    }
 }
 
 module.exports = blogs;
+
+
+// UPDATE "public"."blogposts"
+
+// SET "date"='DEFAULT', "title"='Actually this is a change', "preview"='Changing!', "content"='THE CONTENT HAS CHANGED MY GUY!' 
+// WHERE "id"=1 
+
+// RETURNING "id", "author_id", "date", "title", "preview", "content";

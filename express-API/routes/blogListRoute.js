@@ -32,4 +32,15 @@ router.post("/", async (req, res, next) => {
     });
 });
 
+router.put("/:id", async (req, res, next) => {
+    const {id} = req.params;
+    const { title, preview, content } = req.body;
+
+    const oneBlogPost = blogs.updatePostById(title, preview, content, id);
+
+    res.json({
+        message: "Blog post updated!."
+    });
+});
+
 module.exports = router;
