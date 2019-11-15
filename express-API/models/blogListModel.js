@@ -21,7 +21,7 @@ class blogs {
     static async getPostById(blogId) {
         try {
             const response = await db.one(
-                `SELECT * FROM blogposts WHERE id=$1`,
+                `SELECT * FROM blogposts WHERE id=$1;`,
                 [blogId]
             );
             return response;
@@ -33,7 +33,7 @@ class blogs {
     static async deleteBlogPostById(blogId) {
         try {
             const response = await db.one(
-                `DELETE FROM blogposts WHERE id=$1`,
+                `DELETE FROM blogposts WHERE id=$1;`,
                 [blogId]
             );
             return response;
@@ -42,11 +42,12 @@ class blogs {
         }
     }
 
-    static async createBlogPost() {
+    static async createBlogPost(title, preview, content) {
         try {
             const response = await db.one(
-                `DELETE FROM blogposts WHERE id=$1`,
-                [blogId]
+                `INSERT INTO blogposts (author_id, title, preview, content)
+                VALUES(1, $1, $2, $3);`,
+                [title, preview, content]
             );
             return response;
         } catch (err) {

@@ -7,7 +7,7 @@ const express = require("express"),
 
 // Route/Controllers
 const indexRouter = require("./routes/index"),
-    blogRouter = require("./routes/blogList");
+    blogRouter = require("./routes/blogListRoute");
 
 const app = express();
 
